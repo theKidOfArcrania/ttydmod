@@ -1,0 +1,10 @@
+[
+    {
+        "arguments": [
+            "clang",
+            "-Iinclude"
+        ],
+        "directory": "/home/henry/git/problems/ttydmod/rel/",
+        "file": "test"
+    }
+]

@@ -2,7 +2,8 @@
     {
         "arguments": [
             "clang",
-            "-Iinclude"
+            "-Iinclude",
+            "-m32"
         ],
         "directory": "/home/henry/git/problems/ttydmod/rel/",
         "file": "test"

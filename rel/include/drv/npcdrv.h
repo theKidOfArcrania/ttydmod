@@ -6,6 +6,10 @@
 #include <dolphin/os.h>
 #include <mario/mario_pouch.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define NPC_FIELD_MAX_COUNT 36
 #define NPC_BATTLE_MAX_COUNT 16
 
@@ -210,5 +214,9 @@ void npcSetBattleInfo(NpcEntry* npc, s32 battleInfoId);
 void fbatChangeMode(s16 mode);
 
 NpcTerritoryType dbGetDefData(NpcTerritoryInfo* info, const char* description);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

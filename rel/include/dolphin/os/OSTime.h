@@ -3,6 +3,10 @@
 
 #include <platform.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef s64 OSTime;
 typedef u32 OSTick;
 
@@ -39,5 +43,9 @@ extern u32 __OSBusClock AT_ADDRESS(0x800000F8);
 #define OSMicrosecondsToTicks(usec) (((usec) * (OS_TIMER_CLOCK / 125000)) / 8)
 #define OSNanosecondsToTicks(nsec)                                            \
     (((nsec) * (OS_TIMER_CLOCK / 125000)) / 8000)
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

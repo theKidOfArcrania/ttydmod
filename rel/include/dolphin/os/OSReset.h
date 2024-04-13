@@ -3,6 +3,10 @@
 
 #include <platform.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef bool (*OSResetFunction)(bool);
 
 typedef struct OSResetFunctionInfo OSResetFunctionInfo;
@@ -24,5 +28,9 @@ void __OSDoHotReset(s32 arg0);
 
 bool __OSCallResetFunctions(bool funcs_arg);
 u32 OSGetResetCode(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

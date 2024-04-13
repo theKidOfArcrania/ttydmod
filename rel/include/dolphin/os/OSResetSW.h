@@ -6,6 +6,10 @@
 #include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSInterrupt.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 struct _OSResetSW_Unk1;
 typedef bool (*OSResetSW_Predicate)(struct _OSResetSW_Unk1*);
 typedef union {
@@ -57,5 +61,9 @@ bool OSGetResetSwitchState(void);
 
 void __OSResetSWInterruptHandler(__OSInterrupt interrupt, OSContext* context);
 bool OSGetResetButtonState(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

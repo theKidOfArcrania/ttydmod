@@ -7,6 +7,10 @@
 
 #include <dolphin/os/OSContext.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define OS_PRIORITY_MIN 0
 #define OS_PRIORITY_MAX 31
 
@@ -115,5 +119,9 @@ void CheckThreadQueue(void);
 void UnsetRun(OSThread* thread);
 void OSCheckActiveThreads(void);
 void SetEffectivePriority(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

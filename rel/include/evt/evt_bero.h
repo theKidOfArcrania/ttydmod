@@ -3,6 +3,10 @@
 #include <platform.h>
 #include <mgr/evtmgr.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef union BeroINFO {
 	const char* name;
 	s32 value;
@@ -59,10 +63,6 @@ USERFUNC_DEF(evt_bero_get_now_number);
 USERFUNC_DEF(evt_bero_get_info);
 USERFUNC_DEF(evt_bero_get_into_info);
 
-
-
-
-
-
-
-
+#ifdef __cplusplus
+}
+#endif

@@ -4,6 +4,10 @@
 #include <platform.h>
 #include <dolphin/mtx.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct MapObjectHitEntry {
 	u8 field_0x0[0x88 - 0x0]; //0x0
 } MapObjectHitEntry;
@@ -28,5 +32,9 @@ typedef struct MapObjectWork {
 
 void mobjInit(void);
 void mobjMain(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

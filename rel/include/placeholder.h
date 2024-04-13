@@ -5,6 +5,10 @@
 
 #include <m2c_macros.h> // IWYU pragma: export
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /// A label in a jump table
 typedef void (*jmp_t)(void);
 
@@ -126,4 +130,8 @@ OSPanic(__FILE__, __LINE__, "Function is not implemented!")
     do {                                                                      \
         UNUSED u64 _0 = 0, _1 = 0, _2 = 0, _3 = 0;                            \
     } while (0)
+#endif
+
+#ifdef __cplusplus
+}
 #endif

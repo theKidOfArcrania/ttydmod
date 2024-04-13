@@ -6,9 +6,12 @@
 #include <stddef.h>  // IWYU pragma: export
  */
 
+#ifndef __cplusplus
 typedef int bool;
+#endif
+
 #if defined(__clang__) || defined(__GNUC__)
-typedef long long size_t;
+typedef unsigned int size_t;
 #else
 typedef long size_t;
 #endif
@@ -37,7 +40,7 @@ typedef unsigned char u8;
 typedef unsigned short u16;
 
 /// An unsigned 32-bit integer
-typedef unsigned long u32;
+typedef unsigned int u32;
 
 /// An unsigned 64-bit integer
 typedef unsigned long long u64;
@@ -194,6 +197,12 @@ typedef void (*Event)(void);
 #else
 #define SDATA
 #define WEAK
+#endif
+
+#if defined(__MWERKS__)
+#define REGISTER register
+#else
+#define REGISTER
 #endif
 
 #endif

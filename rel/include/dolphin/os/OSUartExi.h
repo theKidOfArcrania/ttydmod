@@ -3,8 +3,16 @@
 
 #include <platform.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 s32 ReadUARTN(void);
 void WriteUARTN(void);
 s32 InitializeUART(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -1,8 +1,9 @@
 [
     {
         "arguments": [
-            "clang",
+            "gcc",
             "-Iinclude",
+            "-DTTYD_US",
             "-m32"
         ],
         "directory": "/home/henry/git/problems/ttydmod/rel/",

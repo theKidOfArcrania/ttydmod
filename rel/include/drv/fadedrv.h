@@ -6,6 +6,10 @@
 #include <drv/imgdrv.h>
 #include <texPalette.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef void (*OffscreenCallback)(void* param, void* unused);
 
 typedef enum FadeType {
@@ -67,5 +71,9 @@ BOOL fadeIsFinish(void);
 void fadeReset(s32 id);
 TPLHeader* fadeGetTpl(void);
 void fadeSetNarrowFast(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

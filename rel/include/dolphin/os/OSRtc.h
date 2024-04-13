@@ -6,6 +6,10 @@
 #include <dolphin/os.h>
 #include <dolphin/os/OSContext.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct OSSram {
     u16 checkSum;
     u16 checkSumInv;
@@ -43,5 +47,9 @@ u32 OSGetProgressiveMode(void);
 void OSSetProgressiveMode(u32 mode);
 void WriteSramCallback(s32 unused0, OSContext* unused1);
 void __OSInitSram(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // DOLPHIN_OS_OSRTC

@@ -8,6 +8,10 @@
 #include <evt/evt_lottery.h>
 #include <countdown.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 struct AA {
   FadeType a;
   int b;
@@ -108,5 +112,9 @@ void marioStMain(void);
 void marioStDisp(void);
 void marioStSystemLevel(s32 level);
 s32 marioStGetSystemLevel(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

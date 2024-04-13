@@ -4,10 +4,13 @@
 #include <platform.h>
 #include <placeholder.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef long Bytecode;
 typedef Bytecode EvtScript[];
 
-#pragma enumsalwaysint off
 typedef enum EvtOpcode
 {
 /* 0x00 */ EVT_OPC_NEXT,
@@ -131,7 +134,6 @@ typedef enum EvtOpcode
 /* 0x76 */ EVT_OPC_DEBUG_REM,
 /* 0x77 */ EVT_OPC_DEBUG_BP
 } EvtOpcode;
-#pragma enumsalwaysint on
 
 #define ARRAY_COUNT(arr) (sizeof(arr) / sizeof(arr[0]))
 
@@ -404,6 +406,10 @@ f32 evtSetFloat(struct EventEntry* entry, s32 index, f32 value);
 #define PTR(value) ((s32)(value))
 #else
 #define PTR(value) ((s32)(void*)(value))
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif //_EVT_H_

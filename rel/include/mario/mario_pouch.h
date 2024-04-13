@@ -3,6 +3,10 @@
 
 #include <platform.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define MAX_KEY_ITEMS 121
 //TODO: change name if it collides with backpack something
 #define MAX_HELD_ITEMS 20
@@ -517,5 +521,9 @@ s32 pouchGetPartyColor(MarioPartner partnerId);
 void pouchSetPartyColor(MarioPartner partnerId, u16 color);
 void pouchSetYoshiName(char* name);
 char* pouchGetYoshiName(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

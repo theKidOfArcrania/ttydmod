@@ -7,6 +7,10 @@
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSTime.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef void (*SICallback)(s32 chan, u32 sr, OSContext* context);
 typedef void (*SITypeAndStatusCallback)(s32 chan, u32 type);
 
@@ -44,5 +48,9 @@ bool SIUnregisterPollingHandler(__OSInterruptHandler handler);
 u32 SIGetType(s32 chan);
 u32 SIGetTypeAsync(s32 chan, SITypeAndStatusCallback callback);
 u32 SIDecodeType(u32 type);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // _DOLPHIN_SIPRIV

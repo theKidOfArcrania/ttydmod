@@ -5,6 +5,10 @@
 
 #include <dolphin/os/OSContext.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define OS_ERROR_SYSTEM_RESET 0
 #define OS_ERROR_MACHINE_CHECK 1
 #define OS_ERROR_DSI 2
@@ -28,7 +32,11 @@ typedef void (*OSErrorHandler)(OSError error, OSContext* context, ...);
 
 OSErrorHandler OSSetErrorHandler(OSError error, OSErrorHandler handler);
 void __OSUnhandledException(u8 error, OSContext* context, u32 dsisr, u32 dar);
-ATTRIBUTE_NORETURN void OSPanic(char* file, int line, char* msg, ...);
+ATTRIBUTE_NORETURN void OSPanic(const char* file, int line, const char* msg, ...);
 void OSReport(char*, ...);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

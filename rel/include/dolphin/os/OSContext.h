@@ -3,6 +3,10 @@
 
 #include <platform.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define __OS_CONTEXT_FRAME 768
 
 #define OS_CONTEXT_R0 0
@@ -165,5 +169,9 @@ void __OSContextInit(void);
 void __OSLoadFPUContext(u32 _, OSContext* fpuctx);
 void OSLoadFPUContext(OSContext* fpuctx);
 void __OSSaveFPUContext(u32 unused1, u32 unused2, OSContext* fpuctx);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -1,6 +1,10 @@
 #ifndef __COUNTDOWN
 #define __COUNTDOWN
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <platform.h>
 
 typedef struct CountdownWork {
@@ -13,5 +17,9 @@ void countDownSaveReStart(void);
 
 
 void countDownMain(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

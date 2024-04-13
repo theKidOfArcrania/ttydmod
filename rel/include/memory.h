@@ -4,6 +4,10 @@
 #include <dolphin/gx.h>
 #include <mgr/filemgr.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef enum HEAP_TYPE {
 	HEAP_DEFAULT = 0,
 	HEAP_MALLOC = 1, //for memInit/Clear to do its allocation
@@ -51,5 +55,9 @@ void smartAutoFree(u32 a1);
 void smartFree(smartEntry* entry);
 smartEntry* smartAlloc(u32 size, u8 type);
 GXTexObj* smartTexObj(GXTexObj* obj, void** image_ptr);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

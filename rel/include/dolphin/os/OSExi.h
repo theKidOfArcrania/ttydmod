@@ -6,6 +6,10 @@
 #include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSInterrupt.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef void (*EXICallback)(s32 chan, OSContext* context);
 
 typedef enum {
@@ -69,5 +73,9 @@ bool EXILock(s32, u32 dev, EXICallback unlockedCallback);
 bool EXIUnlock(EXIChannel);
 u32 EXIGetState(EXIChannel);
 s32 EXIGetID(EXIChannel, u32 dev, u32* id);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

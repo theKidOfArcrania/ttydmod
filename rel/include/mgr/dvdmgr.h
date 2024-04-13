@@ -4,6 +4,10 @@
 #include <platform.h>
 #include <dolphin/dvd/dvd.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define DVDEntryCount 0x100
 
 typedef BOOL (*DVDMgrCallback)(void);
@@ -40,5 +44,9 @@ void DVDMgrReadAsync(DVDEntry* entry, void* address, u32 size, s32 offset, DVDCa
 void DVDMgrClose(DVDEntry* entry);
 u32 DVDMgrGetLength(DVDEntry* entry);
 void DVDMgrSetupCallback(DVDMgrCallback callback);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

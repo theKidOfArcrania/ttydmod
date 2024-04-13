@@ -7,6 +7,10 @@
 #include <mario/mariost.h>
 #include <mgr/evtmgr_cmd.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef EvtReturnCodes (*UserFunction)(EventEntry *evt, BOOL blocked);
 
 typedef struct EventCommand {
@@ -37,7 +41,7 @@ struct EventEntry {
   OSTime lifetime; //0x0
   u8 flags; //0x8, validated
   u8 params; //0x9, number of params
-  EvtOpcode opcode; //0xA
+  u8 opcode; //0xA
   u8 priority; //0xB, validated
   u8 type; //0xC
   u8 blocked; //0xD
@@ -124,5 +128,9 @@ void evtStopOther(EventEntry* entry, u32 type);
 void evtStartOther(EventEntry* entry, u32 type);
 EventEntry* evtGetPtr(s32 index);
 EventEntry* evtGetPtrID(s32 eventId);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

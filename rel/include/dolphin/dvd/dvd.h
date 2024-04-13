@@ -1,6 +1,10 @@
 #ifndef __DOLPHIN_DVD_H_
 #define __DOLPHIN_DVD_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <platform.h>
 #include <dolphin/dvd/forward.h>
 
@@ -142,5 +146,9 @@ bool DVDSeekAbsAsyncPrio(DVDCommandBlock* block, u32 offset,
                          DVDCBCallback callback, s32 prio);
 bool DVDPrepareStreamAbsAsync(DVDCommandBlock* block, u32 length, u32 offset,
                               DVDCBCallback callback);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

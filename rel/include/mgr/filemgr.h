@@ -8,6 +8,10 @@ typedef void (*FileCallback)(struct FileEntry* file);
 
 #include <mgr/dvdmgr.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct FileEntry {
 	u8 state; //0x0
 	s8 field_0x1; //0x1, TODO enum archivetype/type
@@ -39,5 +43,9 @@ FileEntry* fileAlloc(const char* filename, u8 type);
 void fileFree(FileEntry* handle);
 s32 fileAsyncf(u8 type, void (*callback)(FileEntry*), const char* format, ...);
 void fileSetCurrentArchiveType(s32 type);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -6,6 +6,10 @@
 #include <drv/camdrv.h>
 #include <memory.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct ImageShadow {
   s32 flags; //0x0
   u16 field_0x4; //0x4
@@ -40,5 +44,9 @@ typedef struct ImageEntry {
   CameraId cameraId; //0x150
   s32 field_0x154; //0x154
 } ImageEntry;
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

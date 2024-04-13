@@ -2,6 +2,10 @@
 
 #include <platform.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 struct SequenceWork;
 typedef void (*SequenceCallback)(struct SequenceWork* work);
 
@@ -35,3 +39,7 @@ SequenceType seqGetSeq(void);
 SequenceType seqGetPrevSeq(void);
 SequenceType seqGetNextSeq(void);
 BOOL seqCheckSeq(void);
+
+#ifdef __cplusplus
+}
+#endif

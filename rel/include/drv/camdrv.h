@@ -6,6 +6,10 @@
 
 //#pragma enumsalwaysint on
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct CameraEntry CameraEntry;
 typedef void (*CameraCallback)(struct CameraEntry* entry);
 
@@ -76,5 +80,9 @@ void camDraw(void);
 
 CameraEntry* camGetPtr(s32 id);
 CameraEntry* camGetCurPtr(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

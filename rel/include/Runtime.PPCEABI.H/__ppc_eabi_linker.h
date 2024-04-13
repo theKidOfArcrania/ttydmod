@@ -1,6 +1,10 @@
 #ifndef __PPC_EABI_LINKER
 #define __PPC_EABI_LINKER
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 extern char _stack_addr[];
 extern char _stack_end[];
 extern char _heap_addr[];
@@ -67,5 +71,9 @@ extern char _f_PPC_EMB_sdata0[];
 extern char _e_PPC_EMB_sdata0[];
 extern char _f_PPC_EMB_sbss0[];
 extern char _e_PPC_EMB_sbss0[];
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // __PPC_EABI_LINKER

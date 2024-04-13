@@ -3,6 +3,10 @@
 
 #include <platform.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct _HeapCell {
     struct _HeapCell* prev;
     struct _HeapCell* next;
@@ -29,5 +33,9 @@ void OSFreeToHeap(OSHeapHandle heap, void* ptr);
 
 #define OSAlloc(size) OSAllocFromHeap(__OSCurrHeap, (size))
 #define OSFree(ptr) OSFreeToHeap(__OSCurrHeap, (ptr))
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

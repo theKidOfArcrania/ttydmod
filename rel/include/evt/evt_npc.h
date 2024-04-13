@@ -5,6 +5,10 @@
 #include <drv/npcdrv.h>
 #include <mgr/evtmgr.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct NpcSetupInfo {
 	const char* name; //0x0
 	s32 flags; //0x4
@@ -73,5 +77,9 @@ USERFUNC_DEF(evt_npc_set_anim);
 USERFUNC_DEF(evt_npc_set_autotalkpose);
 USERFUNC_DEF(evt_npc_jump_position_nohit);
 USERFUNC_DEF(evt_npc_wait_pera);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

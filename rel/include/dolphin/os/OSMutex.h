@@ -5,6 +5,10 @@
 
 #include <dolphin/os/OSThread.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 struct OSMutex {
     OSThreadQueue queue; // at 0x00
     OSThread* thread;    // at 0x08
@@ -21,5 +25,9 @@ bool OSTryLockMutex(OSMutex*);
 bool __OSCheckDeadLock(OSThread* thread);
 bool __OSCheckMutexes(OSThread* thread);
 bool __OSCheckMutex(OSMutex* mutex);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

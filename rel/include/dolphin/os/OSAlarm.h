@@ -6,6 +6,10 @@
 #include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSTime.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct OSAlarm OSAlarm;
 typedef void (*OSAlarmHandler)(OSAlarm* alarm, OSContext* context);
 
@@ -25,5 +29,9 @@ void OSInitAlarm(void);
 void OSCreateAlarm(OSAlarm* alarm);
 void OSSetPeriodicAlarm(OSAlarm* alarm, OSTime start, OSTime period,
                         OSAlarmHandler handler);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // DOLPHIN_OS_OSALARM_H

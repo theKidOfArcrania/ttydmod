@@ -9,6 +9,10 @@
 #include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSException.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 extern vu32 __PIRegs[12] AT_ADDRESS(0xCC003000);
 extern vu32 __DIRegs[16] AT_ADDRESS(0xCC006000);
 
@@ -28,5 +32,9 @@ void OSDefaultExceptionHandler(void);
 
 void ClearArena(void);
 u32 __OSGetDIConfig(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

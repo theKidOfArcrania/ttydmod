@@ -4,6 +4,10 @@
 
 #include <dolphin/dvd/dvd.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct OSBootInfo {
     DVDDiskID DVDDiskID; // _00
     u32 magic;           // _20
@@ -15,5 +19,9 @@ typedef struct OSBootInfo {
     void* FSTLocation;   // _38, start addr of FST area
     u32 FSTMaxLength;    // _3C, length of FST area
 } OSBootInfo;
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -21,13 +21,19 @@ typedef u8 GXBool;
 #define GX_ENABLE  ((GXBool)1)
 #define GX_DISABLE ((GXBool)0)
 
+typedef struct GX_COLOR {
+  u8 r, g, b, a;
+} GX_COLOR;
+
 // Pack value into bitfield
 #define GX_BITFIELD_SET(field, pos, size, value) (field) = __rlwimi((field), (value), 31 - (pos) - (size) + 1, (pos), (pos) + (size)-1)
 
 #define GX_VIEWPORT_SZ 6
 #define GX_PROJECTION_SZ 7
 
+#ifdef __MWERKS__
 #pragma enumsalwaysint off
+#endif
 typedef enum _GXCullMode {
 	GX_CULL_NONE,
 	GX_CULL_FRONT,
@@ -35,7 +41,9 @@ typedef enum _GXCullMode {
 	GX_CULL_ALL
 
 } GXCullMode;
+#ifdef __MWERKS__
 #pragma enumsalwaysint reset
+#endif
 
 // TODO: Placeholder
 typedef u32 _GXVtxAttrFmtList;
@@ -1111,9 +1119,9 @@ typedef union {
 } PPCWGPipe;
 
 #ifdef __MWERKS__
-volatile PPCWGPipe GXWGFifo : GXFIFO_ADDR;
+extern volatile PPCWGPipe GXWGFifo : GXFIFO_ADDR;
 #else
-volatile PPCWGPipe GXWGFifo;
+extern volatile PPCWGPipe GXWGFifo;
 #endif
 
 inline void GXSetWasteFlags()

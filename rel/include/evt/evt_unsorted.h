@@ -4,6 +4,9 @@
 #include <platform.h>
 #include <mgr/evtmgr.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 //TODO: move this into proper sorted files
 
@@ -48,5 +51,9 @@ USERFUNC_DEF(evt_item_delete);
 
 USERFUNC_DEF(evt_cam_shake);
 USERFUNC_DEF(evt_eff64);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

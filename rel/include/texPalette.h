@@ -1,6 +1,11 @@
-#pragma once
+#ifndef _TEXPALETTE_H
+#define _TEXPALETTE_H
 
 #include <dolphin/gx.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct TPLPaletteHeader {
   u16 entryCount;
@@ -55,3 +60,9 @@ typedef struct TPLHeader {
 void TEXGetGXTexObjFromPalette(TPLHeader* header, GXTexObj* obj, u32 id);
 TPLImageEntry* TEXGet(TPLHeader* header, u32 id);
 void UnpackTexPalette(TPLHeader* header);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

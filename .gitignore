@@ -1,6 +1,5 @@
 /base
 /patch
-/main.iso
 /mod.xdelta
 /ttyd-mod-manager
 !mod/P-G8ME/files/rel/mod.rel
@@ -8,3 +7,4 @@
 *.elf
 *.binpatch
 *.rel
+*.iso

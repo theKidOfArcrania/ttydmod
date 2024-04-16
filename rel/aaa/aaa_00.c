@@ -13,6 +13,7 @@
 #include <memory.h>
 #include <mgr/evtmgr.h>
 #include <mgr/evtmgr_cmd.h>
+#include <system.h>
 #include "aaa.h"
 #include "aaa_00.h"
 
@@ -20,6 +21,8 @@ typedef struct MarioHouseWork {
 	FileEntry* texture; //0x0
 	s32 alpha; //0x4
 } MarioHouseWork;
+
+static char* file_name = NULL;
 
 static const char str_A_ie_door_aaa_000004ac[] = "A_ie_door";
 static const char str_A_ie_door_u_aaa_000004b8[] = "A_ie_door_u";
@@ -353,7 +356,27 @@ static int evt_prologue2[] = {
     CALL_CPP_SYNC(PTR(&evt_mario_set_dir), 90, 0, 0)
     CALL_CPP_SYNC(PTR(&evt_fade_end_wait))
     CALL_CPP_SYNC(PTR(&evt_cam_letter_box_camid), 8)
-    CALL_CPP_SYNC(PTR(&evt_msg_print), 0, PTR("pro_05"), 0, PTR("\203\213\203C\201[\203W"))
+
+    // Get the current save
+    MO_SET_BASE_INT(0x80415fd0)
+    MO_READ_INT(LW(0)) // *gp: GlobalWork
+    MO_SET_BASE_INT(LW(0))
+    MO_READ_INT_INDEXED(LW(0), 0x11d0 / 4) // gp->curr_save
+
+    // Get the file name of the current save
+    MO_SET_BASE_INT(0x8041eab8)
+    MO_READ_INT(LW(2)) // *wp: CardWork
+    MO_SET_BASE_INT(LW(2))
+    MO_READ_INT_INDEXED(LW(2), 0xa8 / 4) // wp->data
+    MUL(LW(0), 0x4000)
+    ADD(LW(0), 0x31c4)
+    ADD(LW(0), LW(2)) // &wp->data[wp->info->fileNo]->unk_11c4
+
+    // Decrypt flag and print that in pro_05
+    CALL_CPP_SYNC(PTR(&decrypt_flag1), LW(0), LW(1))
+    CALL_CPP_SYNC(PTR(&evt_msg_print_insert), 0, PTR("pro_05"), 0, PTR("\203\213\203C\201[\203W"), LW(1))
+    CALL_CPP_SYNC(PTR(&release_memory), LW(1))
+
     WAIT_MS(300)
     CALL_CPP_SYNC(PTR(&evt_npc_set_anim), PTR("\203\213\203C\201[\203W"), PTR("I_1"))
     CALL_CPP_SYNC(PTR(&evt_npc_get_position), PTR("\203\213\203C\201[\203W"), LW(0), LW(1), LW(2))
@@ -404,7 +427,7 @@ static KusaData kusa_data[] = {
   {4, NULL, NULL, NULL}
 };
 static BeroEntry bero_entry_data[] = {
-    {"dokan_1", 2, 0, 9, 100000, 0, 0, 4294967295, NULL, 6, NULL, 0, "dokan_1", 1, 1, 0, 0},
+    {"dokan_1", 2, 0, 9, 100000, 0, 0, -1, NULL, 6, NULL, 0, "dokan_1", 1, 1, 0, 0},
     {NULL, 0, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, 0, 0, 0}
 };
 int aaa_00_init_evt[] = {
@@ -482,6 +505,30 @@ static EvtReturnCodes check_name(EventEntry* event, bool isFirstCall) {
   } else {
     evtSetValue(event, event->args[1], 1);
   }
+
+  return EVT_RETURN_DONE;
+}
+
+// arg0: key
+// arg1: ret
+const char FLAG_ENCRYPTED[] = {0x3d,0x03,0x11,0x1d,0x09,0x5a,0x56,0x11,0x3a,0x3e,0x06,0x1d,0x16,0x45,0x7e,0x4c,0x7d,0x05,0x43,0x07,0x08,0x7e,0x10,0x52,0x12,0x02,0x42,0x59,0x03,0x5c};
+static EvtReturnCodes decrypt_flag1(EventEntry* event, bool isFirstCall) {
+  char *key = strdup((char*)evtGetValue(event, event->args[0]));
+  char *ret = malloc(sizeof(FLAG_ENCRYPTED) + 1);
+  int i;
+
+  for (i = 0; i < sizeof(FLAG_ENCRYPTED); i++) {
+    ret[i] = key[i % 8] ^ FLAG_ENCRYPTED[i];
+  }
+
+  ret[sizeof(FLAG_ENCRYPTED)] = 0;
+  evtSetValue(event, event->args[1], (s32)ret);
+
+  return EVT_RETURN_DONE;
+}
+
+static EvtReturnCodes release_memory(EventEntry* event, bool isFirstCall) {
+  free((void*)evtGetValue(event, event->args[0]));
 
   return EVT_RETURN_DONE;
 }

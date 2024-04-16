@@ -37,6 +37,7 @@ USERFUNC_DEF(evt_mario_kill_party);
 USERFUNC_DEF(evt_mario_balloon_off);
 
 USERFUNC_DEF(evt_msg_print);
+USERFUNC_DEF(evt_msg_print_insert);
 
 USERFUNC_DEF(evt_eff_fukidashi);
 

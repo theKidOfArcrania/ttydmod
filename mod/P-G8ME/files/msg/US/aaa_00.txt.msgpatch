@@ -18,3 +18,20 @@ What's going on?
 <p>
 <shake>Your body...<wait 100> it's fading!</shake>
 <k>
+[#pro_05#]
+What do you know? <wait 250>It's true!
+<wait 250>
+Oh... <wait 250>there seems to be something
+printed here at the bottom.
+<k>
+<p>
+Your first flag is... <wait 250>
+
+%s!
+<k>
+<p>
+There's also a weathered old
+map in here with the letter.
+<k>
+<p>
+Check it out!

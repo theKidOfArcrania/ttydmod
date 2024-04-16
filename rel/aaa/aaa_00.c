@@ -10,6 +10,7 @@
 #include <evt/evt_snd.h>
 #include <evt/evt_sub.h>
 #include <evt/evt_unsorted.h>
+#include <memory.h>
 #include <mgr/evtmgr.h>
 #include <mgr/evtmgr_cmd.h>
 #include "aaa.h"
@@ -440,17 +441,43 @@ int aaa_00_init_evt[] = {
 static MarioHouseWork *wp;
 
 
+static void *malloc(size_t size) {
+  return __memAlloc(HEAP_DEFAULT, size);
+}
+
+static void free(void *ptr) {
+  __memFree(HEAP_DEFAULT, ptr);
+}
+
 void mapdelete(void) {
     if (wp != NULL && wp->texture != NULL) {
         fileFree(wp->texture);
     }
 }
 
+static char *strdup(char* s) {
+  size_t len = 0;
+  char *ret;
+  while (s[len++]) {}
+  ret = malloc(len);
+  while (len --> 0) {
+    ret[len] = s[len];
+  }
+  return ret;
+}
+
 // arg0: name
 // arg1: ret
 static EvtReturnCodes check_name(EventEntry* event, bool isFirstCall) {
-  char* name = (char*)evtGetValue(event, event->args[0]);
-  if (memcmp(name, "Password", 8)) {
+  char* name = strdup((char*)evtGetValue(event, event->args[0]));
+  const char *key = "Thousand";
+  int i;
+
+  for (i = 0; i < 8; i++) {
+    name[i] ^= key[i];
+  }
+
+  if (memcmp(name, "\x19\x09\x1d\x1c\x1c\x40\x4f\x45", 8)) {
     evtSetValue(event, event->args[1], 0);
   } else {
     evtSetValue(event, event->args[1], 1);
@@ -471,7 +498,7 @@ static int mapdraw(EventEntry* event, bool isFirstCall) {
         wp->alpha = 255;
         evtSetValue(event, GF(0), 1); //done rolling in
     }
-    dispEntry(CAMERA_3D, 7, draw, 1000.0f, wp);
+    dispEntry(CAMERA_3D, 7, 1000.0f, draw, wp);
     return EVT_RETURN_BLOCK;
 }
 static void draw(CameraId cameraId, void* param) {

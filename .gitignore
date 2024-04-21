@@ -2,9 +2,12 @@
 /patch
 /mod.xdelta
 /ttyd-mod-manager
+/mpatch
+/handout
 !mod/P-G8ME/files/rel/mod.rel
 *.o
 *.elf
 *.binpatch
 *.rel
 *.iso
+*.tar.gz

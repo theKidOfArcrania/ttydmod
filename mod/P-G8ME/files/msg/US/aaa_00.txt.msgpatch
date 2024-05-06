@@ -35,3 +35,23 @@ map in here with the letter.
 <k>
 <p>
 Check it out!
+[#pro_11#]
+<system>
+<scale 1.5><shake>DANGER!</shake> <wait 250> <scale 1.0>
+
+Protocol KILL_MARIO has now
+been activated!
+<p>
+...
+<p>
+...
+...
+<p>
+...
+...
+<p>
+...
+<p>
+<speed 0>Segmentation fault
+(Core dumped)
+<k>

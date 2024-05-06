@@ -4,6 +4,7 @@
 #include <drv/dispdrv.h>
 #include <mgr/fontmgr.h>
 #include <system.h>
+#include <pmario_sound.h>
 
 #include <cstdio>
 #include <cstring>
@@ -46,6 +47,16 @@ void Mod::init()
 	{
 		p->initFunction();
 	}
+
+  psbgmlist[1] = BGMList {
+    "BGM_EVT_DANGER5",
+    0x80000000,
+    "sound/stream/evt_kik5_32k",
+    80,
+    64,
+    0,
+    1,
+  };
 }
 
 void Mod::updateEarly()

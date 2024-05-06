@@ -78,14 +78,36 @@ static char door_1[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 static int evt_gameover[] = {
     WAIT_MS(700)
 
-    // TODO: maybe would be good for some ? reaction
+    // Earthquake
+    CALL_CPP_SYNC(PTR(&evt_mario_get_pos), 0, LW(0), LW(1), LW(2))
+    CALL_CPP_SYNC(PTR(&evt_snd_sfxon), PTR("SFX_STG1_QUAKE1"), LW(15))
+    CALL_CPP_SYNC(PTR(&evt_snd_sfx_pos), LW(15), LW(0), LW(1), LW(2))
+
+    BEGIN_THREAD()
+        // Both mario and luigi does ? reaction
+        WAIT_MS(250)
+        CALL_CPP_SYNC(PTR(&evt_eff_fukidashi), 1, PTR("fukidashi"),
+            PTR("\203\213\203C\201[\203W"), 1, 0, 0, 0, 0, 0, 0, 30)
+        CALL_CPP_SYNC(PTR(&evt_eff_fukidashi), 0, PTR("fukidashi2"),
+            0, 1, 0, 0, 0, 0, 0, 0, 30)
+    END_THREAD()
+
+    CALL_CPP_SYNC(PTR(&evt_cam_shake), 4, FLOAT(0.01953125), FLOAT(0.0), 1000)
+    CALL_CPP_SYNC(PTR(&evt_snd_sfxoff), LW(15))
+
+    CALL_CPP_SYNC(PTR(&evt_snd_bgmon), 512, PTR("BGM_EVT_DANGER5"))
+    CALL_CPP_SYNC(PTR(&evt_snd_sfxon_3d), PTR("SFX_STG7_CANNON_SYS_ACTIVE2"),
+        LW(0), LW(1), LW(2))
+    CALL_CPP_SYNC(PTR(&evt_msg_print), 0, PTR("pro_11"), 0, 0)
 
     // Luigi msg saying we are screwed
+    CALL_CPP_SYNC(PTR(&evt_eff_fukidashi), 1, PTR("fukidashi"),
+        PTR("\203\213\203C\201[\203W"), 0, 0, 0, 0, 0, 0, 0, 30)
+    WAIT_MS(1000)
     CALL_CPP_SYNC(PTR(&evt_msg_print), 0, PTR("pro_10"), 0,
         PTR("\203\213\203C\201[\203W"))
     WAIT_MS(500)
 
-    CALL_CPP_SYNC(PTR(&evt_mario_get_pos), 0, LW(0), LW(1), LW(2))
     CALL_CPP_SYNC(PTR(&evt_eff64), 0, PTR("broken_barrier_n64"), 2, LW(0), LW(1),
         LW(2), 1, 0x3c, 0, 0, 0, 0, 0, 0)
     CALL_CPP_SYNC(PTR(&evt_mario_set_pose), PTR("M_I_O"))
